@@ -1,4 +1,12 @@
 $(() => {
+    const showModal = () =>{
+        $('#modal').show()
+    }
+    $('#play-top').on('click', showModal)
+    $('#play-bttm').on('click', showModal)
+    $('#close').on('click', () =>{
+        $('#modal').hide()
+    })
     $('.pokedex').hide()
     $('button').on('click', (event) =>{
         const $userInput = $('input[type="text"]').val().toLowerCase()
@@ -15,6 +23,7 @@ $(() => {
                 (data)=>{
                     //if something comes back print the data 
                     console.log(data)
+                    //deciding which color to use in the background depending on pokemon type 
                     const changeBackground = () =>{
                         if(data.types[0].type.name === 'normal'){
                             $('.box1').css('background', '#a9a877')
@@ -138,6 +147,7 @@ $(() => {
                             populateBox2()
                         },
                         ()=>{
+                            alert('INVALID INPUT - Digit a number from 1-649 or the name of the pokemon.')
                             console.log('bad request 2')
                         }
                     )
