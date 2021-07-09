@@ -1,18 +1,20 @@
 $(() => {
+    // WHOS THAT POKEMON GAME
     const showModal = () =>{
         $('#modal').show()
+        wtpGame()
     }
-    $('#play-top').on('click', showModal)
-    $('#play-bttm').on('click', showModal)
     $('#close').on('click', () =>{
         $('#modal').hide()
     })
+    $('#play-top').on('click', showModal)
+    $('#play-bttm').on('click', showModal)
+    //pokedex 
     $('.pokedex').hide()
-    $('button').on('click', (event) =>{
-        const $userInput = $('input[type="text"]').val().toLowerCase()
+    $('.poke-search').on('click', (event) =>{
+        const $userInput = $('.input-pokedex').val().toLowerCase()
         if($userInput === ''|| $userInput < 0 || $userInput > 649){
             alert('INVALID INPUT - Digit a number from 1-649 or the name of the pokemon.')
-
         }else{
             $('.box3').empty()
             $('.pokedex').show()
@@ -82,7 +84,7 @@ $(() => {
                         }
                     }
                     changeBackground()
-                    const populateBox1 = (data)=>{
+                    const $populateBox1 = (data)=>{
                         //Populating box1 
                         //pokemon img 
                         $('.photo').attr('src', data.sprites.other.dream_world.front_default)
@@ -91,10 +93,10 @@ $(() => {
                         // pokemon type
                         $('.type-1').text(data.types[0].type.name)
                     }
-                    populateBox1(data)
+                    $populateBox1(data)
                     $('.box3').empty()
                     //populating box3
-                    const populateBox3 = (data) =>{
+                    const $populateBox3 = (data) =>{
                         //populate box 3 with info and values 
                         for(let i = 0;i < data.stats.length;i++){
                             let $div= $('<div>').addClass('poke-atributte').attr('id','attr' + i)
@@ -106,13 +108,13 @@ $(() => {
                             $('.box3').append($div)
                         }
                     }
-                    populateBox3(data)
+                    $populateBox3(data)
                     $.ajax({
                         url: `https://pokeapi.co/api/v2/pokemon-species/${data.id}`
                     }).then(
                         (info)=>{
                             console.log(info)
-                            const populateBox2 = () =>{
+                            const $populateBox2 = () =>{
                                 for(let i = 0; i <= 8; i++){
                                     const $div = $('<div>').attr('id', 'div' + i)
                                     const $p = $('<p>').attr('id', 'p' + i)
@@ -144,10 +146,10 @@ $(() => {
                                 $('#p6').html(`Capture rate: <span>${info.capture_rate}%</span>`)
                                 $('#p7').html(`Grownt rate: <span>${info.growth_rate.name}</span>`)
                             }
-                            populateBox2()
+                            $populateBox2()
+
                         },
                         ()=>{
-                            alert('INVALID INPUT - Digit a number from 1-649 or the name of the pokemon.')
                             console.log('bad request 2')
                         }
                     )
@@ -161,5 +163,49 @@ $(() => {
 
         }
     })
+    const wtpGame = () =>{
+        const $num = Math.floor(Math.random() * 649  + 1)
+        $.ajax({
+           url: `https://pokeapi.co/api/v2/pokemon/${$num}`
+        }).then(
+            (poke)=>{
+                console.log(poke)
+                $('#wtp').css('filter', 'brightness(0%)')
+                $('.wtp-text').css('background', '#fff')
+                $('#wtp').attr('src', `${poke.sprites.other.dream_world.front_default}`)
+                $('h4').hide()
+                $('h4').text(`${poke.name}  #${poke.id}`)
+                $('.wtp-text').val('')
+                const checkAnswer = () =>{
+                    const $inputAnswer = $('.wtp-text').val().toLowerCase()
+                        if($inputAnswer === poke.name){
+                            console.log('yes you got it right')
+                            $('#wtp').css('filter', 'brightness(100%)')
+                            $('h4').show()
+                            $('.wtp-text').css('background', 'green')
+                            setTimeout(wtpGame, 5000)
+                        }else{
+                            console.log('no you got it wrong ')
+                            $('#wtp').css('filter', 'brightness(100%)')
+                            $('h4').show()
+                            $('.wtp-text').css('background', 'red')
+                            setTimeout(wtpGame, 5000)
+                    }
+                    $('.reveal').unbind('click', checkAnswer)
+                }
+                $('.reveal').on('click', checkAnswer)
+            },
+            () =>{
+                console.log('bad request')
+            }
+        )
+
+    }
+    const bttnIdontKnow = () =>{
+        $('#wtp').css('filter', 'brightness(100%)')
+        $('h4').show()
+        setTimeout(wtpGame, 5000)
+    }
+    $('.idk').on('click', bttnIdontKnow)
     
 })

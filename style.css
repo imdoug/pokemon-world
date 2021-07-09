@@ -42,7 +42,7 @@ a{
     display: flex;
     justify-content: center;
 }
-button{
+.poke-search{
     padding: 10px;
     width: 5%;
     border: none;
@@ -71,7 +71,7 @@ input{
     color: #333;
     font-family: 'Play', sans-serif;
 }
-.fa{
+.search > button > .fa{
     transform: rotate(90deg);
     color: #435FA7;
 }
@@ -97,7 +97,6 @@ input{
     width: 22%;
     height:300px;
     background: #fff;
-    z-index: 1;
     border-radius: 32px;
     box-shadow: 2px 2px 10px 2px rgb(0 ,0 ,0,.09);
     display: inline-block;
@@ -241,37 +240,82 @@ footer{
     font-weight: 700;
 }
 #modal {
-	background-color: rgba(0, 0, 0, 0.8);
+	background-color: rgba(0, 0, 0, 0.6);
 	position: fixed;
 	top: 0;
 	left: 0;
 	height: 100%;
 	width: 100%;
-	z-index: 1; /* sit on top of other things */ 
 	overflow: auto;
 	display: none;
+    z-index: 2;
 }
 
 #modal-textbox {
-	background-color: #fff;
+    display: flexbox;
+	background-color: #3c59a5;
 	height: 350px;
 	width: 550px;
-	/*border-radius: 2px;*/
     border-radius: 32px;
 	margin: 70px auto;
-	box-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+	box-shadow: 2px 2px 10px 2px rgba(0, 0, 0, 0.2);
 	padding: 2%;
 	line-height: 120%;
+    color: #f9cc04;
+    background-image: url('img/game-bg.png');
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 #modal-textbox > a{
-    font-size: .8em;
-    padding: 3px;
+    font-size: 1.5em;
     float: right;
-    color: #333;
-    border: 1px solid #333;
-    border-radius: 32px;
 }
-
+#wtp{
+    filter: brightness(0%);
+    margin-left: 20%;
+    margin-top: 1%;
+}
+.reveal, .wtp-text{
+   display: inline-block;
+   justify-content: right;
+}
+.reveal{
+    padding: 10px;
+    border: 0;
+    border-top-right-radius: 32px;
+    border-bottom-right-radius: 32px;
+}
+.reveal > span {
+    font-size: 0.8em;
+    border: 1px solid #999;
+    padding: 5px 2px;
+    border-radius: 100%;
+    color: #333;
+    background: #fff
+}
+#wtp{
+    height: 200px;
+    width:  150px;
+}
+.wtp-text{
+    margin-left: 15%;
+    padding: 10px;
+}
+#modal-textbox > p{
+    text-align: right;
+    width: 82%;
+}
+h4{
+    margin-bottom: 0;
+    margin-top: 0;
+    width: 50%;
+    text-align: right;
+    font-size: 1.3em;
+}
+.idk:hover{
+    cursor: pointer;
+    color: red;
+}
 @keyframes rotation {
     0%{
         transform: rotate(0deg);
