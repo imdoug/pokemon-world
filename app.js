@@ -163,6 +163,7 @@ $(() => {
 
         }
     })
+    //game function 
     const wtpGame = () =>{
         const $num = Math.floor(Math.random() * 649  + 1)
         $.ajax({
@@ -170,12 +171,14 @@ $(() => {
         }).then(
             (poke)=>{
                 console.log(poke)
+                //populating game 
                 $('#wtp').css('filter', 'brightness(0%)')
                 $('.wtp-text').css('background', '#fff')
                 $('#wtp').attr('src', `${poke.sprites.other.dream_world.front_default}`)
                 $('h4').hide()
                 $('h4').text(`${poke.name}  #${poke.id}`)
                 $('.wtp-text').val('')
+                // check if user is right or wrong and change background 
                 const checkAnswer = () =>{
                     const $inputAnswer = $('.wtp-text').val().toLowerCase()
                         if($inputAnswer === poke.name){
@@ -183,24 +186,23 @@ $(() => {
                             $('#wtp').css('filter', 'brightness(100%)')
                             $('h4').show()
                             $('.wtp-text').css('background', 'green')
-                            setTimeout(wtpGame, 5000)
                         }else{
                             console.log('no you got it wrong ')
                             $('#wtp').css('filter', 'brightness(100%)')
                             $('h4').show()
                             $('.wtp-text').css('background', 'red')
-                            setTimeout(wtpGame, 5000)
-                    }
-                    $('.reveal').unbind('click', checkAnswer)
-                }
+                    }setTimeout(wtpGame, 5000)
+                    //remove past event listener
+                    $('.reveal').off('click', checkAnswer)
+                }//add event and call function 
                 $('.reveal').on('click', checkAnswer)
             },
             () =>{
                 console.log('bad request')
             }
         )
-
     }
+    //if user doesnt know pokemon show and jump to the next one 
     const bttnIdontKnow = () =>{
         $('#wtp').css('filter', 'brightness(100%)')
         $('h4').show()
