@@ -312,9 +312,28 @@ h4{
     text-align: right;
     font-size: 1.3em;
 }
+.idk{
+    margin-top: 5px;
+    margin-bottom: 0;
+}
 .idk:hover{
     cursor: pointer;
     color: red;
+}
+.countdown{
+    font-size: .8em;
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+footer > .fa-linkedin{
+    margin: 3px;
+    font-size: 1.5em;
+    color: #435FA7;
+}
+footer > .fa-instagram{
+    margin: 3px;
+    font-size: 1.5em;
+    color: #cf2871;
 }
 @keyframes rotation {
     0%{

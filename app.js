@@ -13,7 +13,7 @@ $(() => {
     $('.pokedex').hide()
     $('.poke-search').on('click', (event) =>{
         const $userInput = $('.input-pokedex').val().toLowerCase()
-        if($userInput === ''|| $userInput < 0 || $userInput > 649){
+        if($userInput === ''|| $userInput <= 0 || $userInput > 649){
             alert('INVALID INPUT - Digit a number from 1-649 or the name of the pokemon.')
         }else{
             $('.box3').empty()
@@ -115,7 +115,7 @@ $(() => {
                         (info)=>{
                             console.log(info)
                             const $populateBox2 = () =>{
-                                for(let i = 0; i <= 8; i++){
+                                for(let i = 0; i < 8; i++){
                                     const $div = $('<div>').attr('id', 'div' + i)
                                     const $p = $('<p>').attr('id', 'p' + i)
                                     const $span = $('<span>').attr('id', 'span' + i)
@@ -156,15 +156,34 @@ $(() => {
                 },
                 () =>{
                     //theres is no data 
+                    $('.pokedex').hide()
                     console.log('bad request')
+                    alert('INVALID INPUT - Digit a number from 1-649 or the name of the pokemon.')
                 }
                 
             )   
 
         }
     })
+    //countdown
+    const $countdown = () =>{
+        let seconds = 4
+        $('.countdown').show()
+    const timer = setInterval(()=>{
+        if(seconds > 0){
+            $('.countdown').text(`Next pokemon in ${seconds}`)
+        }else{
+            clearInterval(timer)
+            $('.countdown').text('Go!')
+            seconds = 4
+            $('.countdown').text('')
+        }
+        seconds--
+    }, 1000) 
+    } 
     //game function 
     const wtpGame = () =>{
+        $('.countdown').hide()
         const $num = Math.floor(Math.random() * 649  + 1)
         $.ajax({
            url: `https://pokeapi.co/api/v2/pokemon/${$num}`
@@ -179,7 +198,7 @@ $(() => {
                 $('h4').text(`${poke.name}  #${poke.id}`)
                 $('.wtp-text').val('')
                 // check if user is right or wrong and change background 
-                const checkAnswer = () =>{
+                const $checkAnswer = () =>{
                     const $inputAnswer = $('.wtp-text').val().toLowerCase()
                         if($inputAnswer === poke.name){
                             console.log('yes you got it right')
@@ -191,23 +210,18 @@ $(() => {
                             $('#wtp').css('filter', 'brightness(100%)')
                             $('h4').show()
                             $('.wtp-text').css('background', 'red')
-                    }setTimeout(wtpGame, 5000)
+                    }$countdown()
+                    setTimeout(wtpGame, 5000)
                     //remove past event listener
-                    $('.reveal').off('click', checkAnswer)
+                    $('.reveal').off('click', $checkAnswer)
+                    $('.idk').off('click', $checkAnswer)
                 }//add event and call function 
-                $('.reveal').on('click', checkAnswer)
+                $('.reveal').on('click', $checkAnswer)
+                $('.idk').on('click', $checkAnswer)
             },
             () =>{
                 console.log('bad request')
             }
         )
     }
-    //if user doesnt know pokemon show and jump to the next one 
-    const bttnIdontKnow = () =>{
-        $('#wtp').css('filter', 'brightness(100%)')
-        $('h4').show()
-        setTimeout(wtpGame, 5000)
-    }
-    $('.idk').on('click', bttnIdontKnow)
-    
 })
