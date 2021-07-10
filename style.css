@@ -319,6 +319,7 @@ footer > .fa-instagram{
     padding: 10px;
     border: 0;
     background: #fff;
+    border-radius: 0px 16px 16px 0px;
 }
 .reveal > span {
     font-size: 0.8em;
