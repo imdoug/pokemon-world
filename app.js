@@ -171,7 +171,7 @@ $(() => {
         $('.countdown').show()
     const timer = setInterval(()=>{
         if(seconds > 0){
-            $('.countdown').text(`Next pokemon in ${seconds}`)
+            $('.countdown').text(`Next pokemon in ${seconds}s`)
         }else{
             clearInterval(timer)
             $('.countdown').text('Go!')
