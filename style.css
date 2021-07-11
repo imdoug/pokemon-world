@@ -52,7 +52,7 @@ a{
     border-radius:0px 16px 16px 0px;
     /* border-top-right-radius: 16px;
     border-bottom-right-radius: 16px; */
-    background: #fff;
+    background: whitesmoke;
     box-shadow: 2px 0px 10px 0px rgb(0 ,0 ,0,.09);
 }
 .search > button > img{
@@ -70,7 +70,7 @@ input{
     border-radius:16px 0px 0px 16px;
     /* border-bottom-left-radius: 16px;
     border-top-left-radius: 16px; */
-    background: #fff;
+    background: whitesmoke;
     box-shadow: 2px 0px 10px 2px rgb(0 ,0 ,0,.09);
     padding-left: 15px;
     color: #333;
@@ -181,6 +181,11 @@ h3{
     height: 150px;
     margin-bottom: 20px;
 }
+.photo{
+    max-width: 130px;
+    max-height: 130px;
+}
+
 .wtp-photo{
     display: flex;
     justify-content: center;
@@ -363,7 +368,7 @@ h4{
 }
 .idk:hover{
     cursor: pointer;
-    color: red;
+    color: #ef4523;
 }
 .countdown{
     font-size: .8em;
@@ -402,6 +407,15 @@ h4{
 /* media query attributes */
 @media (max-width: 900px){
     /* header */
+    .pokeball{
+        opacity: 0.15;
+        position: absolute;
+        width: 430px;
+        left: -240px;
+        top:  40px;
+        z-index: -1;
+        animation: rotation 60s infinite linear;  
+    }
     .header{
         height: 100%;
     }
@@ -418,6 +432,7 @@ h4{
     }
     .logo > img{
         width: 40%;
+        height: 100%;
     }
     .input-pokedex{
         width: 45%;
@@ -486,13 +501,11 @@ h4{
     }
     #wtp{
         margin: 0px 30%;
+        margin-bottom: 15px;
     }
     #modal-textbox > h1{
         font-size: 1.5em;
         text-align: center;
-    }
-    .answer{
-        margin: 0px 20%;
     }
     #modal-textbox h1{
         text-shadow: 0px 0px 0px;
@@ -501,9 +514,12 @@ h4{
         width: 50%;
     }
     .reveal{
+        margin: 0;
         border-radius: 0px 16px 16px 0px;
     }
     #poke-info{
+        display: flex;
+        justify-content: center;
         height: 150px;
     }
     #poke-info > div{

@@ -17,6 +17,7 @@ $(() => {
             if($userInput === ''|| $userInput <= 0 || $userInput > 649){
                 alert("SORRY WE COULDN'T CATCH THAT!\nDigit a number from 1-649 or the name of the pokemon.")
             }else{
+                $('.box2').empty()
                 $('.box3').empty()
                 $('.pokedex').show()
                 $.ajax({
@@ -161,6 +162,12 @@ $(() => {
 
             }
         }
+    const playSound = () =>{
+        $('audio').ready(()=>{
+            const audio = new Audio('/music/whos-that-pokemon.mp3')
+            audio.play()
+        })
+    }
     // trigged enter key on pokedex input 
     $('.input-pokedex').keydown( (event) =>{
         if(event.keyCode === 13){
@@ -187,6 +194,7 @@ $(() => {
     } 
     //game function 
     const wtpGame = () =>{
+        playSound()
         $('.countdown').hide()
         const $num = Math.floor(Math.random() * 649  + 1)
         $.ajax({
@@ -208,12 +216,12 @@ $(() => {
                             console.log('yes you got it right')
                             $('#wtp').css('filter', 'brightness(100%)')
                             $('h4').show()
-                            $('.wtp-text').css('background', 'green')
+                            $('.wtp-text').css('background', '#91b73d')
                         }else{
                             console.log('no you got it wrong ')
                             $('#wtp').css('filter', 'brightness(100%)')
                             $('h4').show()
-                            $('.wtp-text').css('background', 'red')
+                            $('.wtp-text').css('background', '#ef4523')
                     }$countdown()
                     setTimeout(wtpGame, 5000)
                     //remove past event listener
