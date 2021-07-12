@@ -1,4 +1,10 @@
 $(() => {
+    //reaload page 
+    const reloadPage = () =>{
+        location.reload()
+    }
+    $('#home').on('click', reloadPage)
+    $('#logo').on('click', reloadPage)
     // WHOS THAT POKEMON GAME
     const showModal = () =>{
         $('#modal').show()
@@ -82,6 +88,7 @@ $(() => {
                                 $('.box3').css('background', '#efb5bc')
                             }
                         }
+                        $('.input-pokedex').val("")
                         changeBackground()
                         const $populateBox1 = (data)=>{
                             //Populating box1 
