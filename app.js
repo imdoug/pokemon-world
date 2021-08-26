@@ -169,12 +169,12 @@ $(() => {
 
             }
         }
-    const playSound = () =>{
-        $('audio').ready(()=>{
-            const audio = new Audio('/music/whos-that-pokemon.mp3')
-            audio.play()
-        })
-    }
+        const playSound = () =>{
+            $('audio').ready(()=>{
+                const audio = new Audio('/music/whos-that-pokemon.mp3')
+                audio.play()
+            })
+        }
     // trigged enter key on pokedex input 
     $('.input-pokedex').keydown( (event) =>{
         if(event.keyCode === 13){
