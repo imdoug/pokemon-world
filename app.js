@@ -3,6 +3,7 @@ $(() => {
     const reloadPage = () =>{
         location.reload()
     }
+    
     $('#home').on('click', reloadPage)
     $('#logo').on('click', reloadPage)
     // WHOS THAT POKEMON GAME
